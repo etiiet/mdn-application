@@ -1,43 +1,94 @@
 import random
 
-# Set agents to roles
-roles = ['controller', 'sentinel', 'duelist', 'initiator', 'any']
-
-controller = ['Brim', 'Viper', 'Omen', 'Astra', 'Harbor', 'Clove']
-sentinel = ['Killjoy', 'Cypher', 'Sage', 'Chamber', 'Deadlock', 'Vyse']
-duelist = ['Phoenix', 'Jett', 'Reyna', 'Raze', 'Yoru', 'Neon', 'Iso']
-initiator = ['Sova', 'Breach', 'Skye', 'Kayo', 'Fade', 'Gekko', 'Tejo']
-any = ['Brim', 'Viper', 'Omen', 'Astra', 'Harbor', 'Clove', 'Killjoy', 
-       'Cypher', 'Sage', 'Chamber', 'Deadlock', 'Vyse', 'Phoenix', 'Jett', 
-       'Reyna', 'Raze', 'Yoru', 'Neon', 'Iso', 'Sova', 'Breach', 'Skye', 
-       'Kayo', 'Fade', 'Gekko', 'Tejo']
-
 while True:
+    # Set agents to roles
+    roles = ['controller', 'sentinel', 'duelist', 'initiator', 'any']
+
+    controller = ['Brim', 'Viper', 'Omen', 'Astra', 'Harbor', 'Clove']
+    sentinel = ['Killjoy', 'Cypher', 'Sage', 'Chamber', 'Deadlock', 'Vyse']
+    duelist = ['Phoenix', 'Jett', 'Reyna', 'Raze', 'Yoru', 'Neon', 'Iso']
+    initiator = ['Sova', 'Breach', 'Skye', 'Kayo', 'Fade', 'Gekko', 'Tejo']
+    any = ['Brim', 'Viper', 'Omen', 'Astra', 'Harbor', 'Clove', 'Killjoy', 
+        'Cypher', 'Sage', 'Chamber', 'Deadlock', 'Vyse', 'Phoenix', 'Jett', 
+        'Reyna', 'Raze', 'Yoru', 'Neon', 'Iso', 'Sova', 'Breach', 'Skye', 
+        'Kayo', 'Fade', 'Gekko', 'Tejo']
+
     # Ask input for type of role
     try:
         while True:
-            userChoice = (input('Enter the type of role you would like to play (controller, sentinel, duelist, initiator, any) or CTRL+C to end the program: '))
+            userChoice = input('Enter the type of role you would like to play (controller, sentinel, duelist, initiator, any) or CTRL+C to end the program: ')
             if userChoice in roles:
                 break
             else:
-                print("Please enter a valid agent")
+                print("Please enter a valid role")
     except KeyboardInterrupt:
         break
 
-    # Ask for any agents to be removed from the list
+    # Choose an agent
     if userChoice == 'controller':
-        chosenAgent = random.choice(controller)
+        while True:
+            agentRemoval = input('Are there any agents you would like to remove? (Y/N): ')
+            if agentRemoval == 'Y':
+                while True:
+                    removedAgent = input('Enter the agent you would like removed: ')
+                    if removedAgent in controller:
+                        controller.remove(removedAgent)
+                        print(controller)
+                        break
+                    else:
+                        print(f"Please enter a valid agent name from the following list: {controller}")
+            elif agentRemoval == 'N':
+                break
+            else:
+                print("Please enter a valid response (Y/N).")
+            chosenAgent = random.choice(controller)
 
     if userChoice == 'sentinel':
-        chosenAgent = random.choice(sentinel)
+        while True:
+            agentRemoval = input('Are there any agents you would like to remove? (Y/N): ')
+            if agentRemoval == 'Y':
+                removedAgent = input('Enter the agent you would like removed: ')
+                sentinel.remove(removedAgent)
+            elif agentRemoval == 'N':
+                break
+            else:
+                print("Please enter a valid response (Y/N).")
+            chosenAgent = random.choice(sentinel)
 
     if userChoice == 'duelist':
-        chosenAgent = random.choice(duelist)
+        while True:
+            agentRemoval = input('Are there any agents you would like to remove? (Y/N): ')
+            if agentRemoval == 'Y':
+                removedAgent = input('Enter the agent you would like removed: ')
+                duelist.remove(removedAgent)
+            elif agentRemoval == 'N':
+                break
+            else:
+                print("Please enter a valid response (Y/N).")
+            chosenAgent = random.choice(duelist)
 
     if userChoice == 'initiator':
-        chosenAgent = random.choice(initiator)
+        while True:
+            agentRemoval = input('Are there any agents you would like to remove? (Y/N): ')
+            if agentRemoval == 'Y':
+                removedAgent = input('Enter the agent you would like removed: ')
+                initiator.remove(removedAgent)
+            elif agentRemoval == 'N':
+                break
+            else:
+                print("Please enter a valid response (Y/N).")
+            chosenAgent = random.choice(initiator)
 
     if userChoice == 'any':
-        chosenAgent = random.choice(any)
+        while True:
+            agentRemoval = input('Are there any agents you would like to remove? (Y/N): ')
+            if agentRemoval == 'Y':
+                removedAgent = input('Enter the agent you would like removed: ')
+                controller.remove(removedAgent)
+            elif agentRemoval == 'N':
+                break
+            else:
+                print("Please enter a valid response (Y/N).")
+            chosenAgent = random.choice(any)
 
     print(f"Your chosen agent is {chosenAgent}")
