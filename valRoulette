@@ -1,0 +1,43 @@
+import random
+
+# Set agents to roles
+roles = ['controller', 'sentinel', 'duelist', 'initiator', 'any']
+
+controller = ['Brim', 'Viper', 'Omen', 'Astra', 'Harbor', 'Clove']
+sentinel = ['Killjoy', 'Cypher', 'Sage', 'Chamber', 'Deadlock', 'Vyse']
+duelist = ['Phoenix', 'Jett', 'Reyna', 'Raze', 'Yoru', 'Neon', 'Iso']
+initiator = ['Sova', 'Breach', 'Skye', 'Kayo', 'Fade', 'Gekko', 'Tejo']
+any = ['Brim', 'Viper', 'Omen', 'Astra', 'Harbor', 'Clove', 'Killjoy', 
+       'Cypher', 'Sage', 'Chamber', 'Deadlock', 'Vyse', 'Phoenix', 'Jett', 
+       'Reyna', 'Raze', 'Yoru', 'Neon', 'Iso', 'Sova', 'Breach', 'Skye', 
+       'Kayo', 'Fade', 'Gekko', 'Tejo']
+
+while True:
+    # Ask input for type of role
+    try:
+        while True:
+            userChoice = (input('Enter the type of role you would like to play (controller, sentinel, duelist, initiator, any) or CTRL+C to end the program: '))
+            if userChoice in roles:
+                break
+            else:
+                print("Please enter a valid agent")
+    except KeyboardInterrupt:
+        break
+
+    # Ask for any agents to be removed from the list
+    if userChoice == 'controller':
+        chosenAgent = random.choice(controller)
+
+    if userChoice == 'sentinel':
+        chosenAgent = random.choice(sentinel)
+
+    if userChoice == 'duelist':
+        chosenAgent = random.choice(duelist)
+
+    if userChoice == 'initiator':
+        chosenAgent = random.choice(initiator)
+
+    if userChoice == 'any':
+        chosenAgent = random.choice(any)
+
+    print(f"Your chosen agent is {chosenAgent}")
