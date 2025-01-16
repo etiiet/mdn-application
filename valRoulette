@@ -21,104 +21,36 @@ while True:
     except KeyboardInterrupt:
         break
 
-    # Choose an agent
+    # Assign agent role
     if userChoice == 'controller':
-        while True:
-            print(f'This is the current agent pool: {controller}')
-            agentRemoval = input('Are there any agents you would like to remove? (Y/N): ')
-            if agentRemoval == 'Y':
-                while True:
-                    removedAgent = input('Enter the agent you would like removed: ')
-                    if removedAgent in controller:
-                        controller.remove(removedAgent)
-                        print(controller)
-                        break
-                    else:
-                        print(f"Please enter a valid agent name from the following list: {controller}")
-            elif agentRemoval == 'N':
-                break
-            else:
-                print("Please enter a valid response (Y/N).")
-        chosenAgent = random.choice(controller)
-        print(f'Your chosen agent is {chosenAgent}')
-
+        agentRole = controller
     if userChoice == 'sentinel':
-        while True:
-            print(f'This is the current agent pool: {sentinel}')
-            agentRemoval = input('Are there any agents you would like to remove? (Y/N): ')
-            if agentRemoval == 'Y':
-                while True:
-                    removedAgent = input('Enter the agent you would like removed: ')
-                    if removedAgent in sentinel:
-                        sentinel.remove(removedAgent)
-                        print(sentinel)
-                        break
-                    else:
-                        print(f"Please enter a valid agent name from the following list: {sentinel}")
-            elif agentRemoval == 'N':
-                break
-            else:
-                print("Please enter a valid response (Y/N).")
-        chosenAgent = random.choice(sentinel)
-        print(f'Your chosen agent is {chosenAgent}')
-
+        agentRole = sentinel
     if userChoice == 'duelist':
-        while True:
-            print(f'This is the current agent pool: {duelist}')
-            agentRemoval = input('Are there any agents you would like to remove? (Y/N): ')
-            if agentRemoval == 'Y':
-                while True:
-                    removedAgent = input('Enter the agent you would like removed: ')
-                    if removedAgent in duelist:
-                        duelist.remove(removedAgent)
-                        print(duelist)
-                        break
-                    else:
-                        print(f"Please enter a valid agent name from the following list: {duelist}")
-            elif agentRemoval == 'N':
-                break
-            else:
-                print("Please enter a valid response (Y/N).")
-        chosenAgent = random.choice(duelist)
-        print(f'Your chosen agent is {chosenAgent}')
-
+        agentRole = duelist
     if userChoice == 'initiator':
-        while True:
-            print(f'This is the current agent pool: {initiator}')
-            agentRemoval = input('Are there any agents you would like to remove? (Y/N): ')
-            if agentRemoval == 'Y':
-                while True:
-                    removedAgent = input('Enter the agent you would like removed: ')
-                    if removedAgent in initiator:
-                        initiator.remove(removedAgent)
-                        print(initiator)
-                        break
-                    else:
-                        print(f"Please enter a valid agent name from the following list: {initiator}")
-            elif agentRemoval == 'N':
-                break
-            else:
-                print("Please enter a valid response (Y/N).")
-        chosenAgent = random.choice(initiator)
-        print(f'Your chosen agent is {chosenAgent}')
-
+        agentRole = initiator
     if userChoice == 'any':
-        while True:
-            print(f'This is the current agent pool: {any}')
-            agentRemoval = input('Are there any agents you would like to remove? (Y/N): ')
-            if agentRemoval == 'Y':
-                while True:
-                    removedAgent = input('Enter the agent you would like removed: ')
-                    if removedAgent in any:
-                        any.remove(removedAgent)
-                        print(any)
-                        break
-                    else:
-                        print(f"Please enter a valid agent name from the following list: {any}")
-            elif agentRemoval == 'N':
-                break
-            else:
-                print("Please enter a valid response (Y/N).")
-        chosenAgent = random.choice(any)
-        print(f'Your chosen agent is {chosenAgent}')
+        agentRole = any
 
+    # Agent removal feature
+    while True:
+        print(f'This is the current agent pool: {agentRole}')
+        agentRemoval = input('Are there any agents you would like to remove? (Y/N): ')
+        if agentRemoval == 'Y':
+            while True:
+                removedAgent = input('Enter the agent you would like removed: ')
+                if removedAgent in agentRole:
+                    agentRole.remove(removedAgent)
+                    print(agentRole)
+                    break
+                else:
+                    print(f"Please enter a valid agent name from the following list: {agentRole}")
+        elif agentRemoval == 'N':
+            break
+        else:
+            print("Please enter a valid response (Y/N).")
+
+    # Print chosen agent
+    chosenAgent = random.choice(agentRole)
+    print(f'Your chosen agent is {chosenAgent}')
