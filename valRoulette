@@ -21,6 +21,8 @@ while True:
     except KeyboardInterrupt:
         break
 
+    # Player creates own list of agents
+
     # Assign agent role
     if userChoice == 'controller':
         agentRole = controller
@@ -55,6 +57,8 @@ while True:
             break
         else:
             print("Please enter a valid response (Y/N).")
+
+    # Agent addition feature
 
     # Print chosen agent
     chosenAgent = random.choice(agentRole)
