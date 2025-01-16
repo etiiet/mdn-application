@@ -4,11 +4,17 @@ while True:
     # Set agents to roles
     roles = ['controller', 'sentinel', 'duelist', 'initiator', 'any']
 
-    controller = ['Brim', 'Viper', 'Omen', 'Astra', 'Harbor', 'Clove']
+    controller = ['Brimstone', 'Viper', 'Omen', 'Astra', 'Harbor', 'Clove']
     sentinel = ['Killjoy', 'Cypher', 'Sage', 'Chamber', 'Deadlock', 'Vyse']
     duelist = ['Phoenix', 'Jett', 'Reyna', 'Raze', 'Yoru', 'Neon', 'Iso']
     initiator = ['Sova', 'Breach', 'Skye', 'Kayo', 'Fade', 'Gekko', 'Tejo']
     any = controller + sentinel + duelist + initiator
+
+    male = ['Brimstone','Omen','Harbor','Cypher','Chamber','Phoenix','Yoru','Iso','Sova','Breach','Kayo','Gekko','Tejo']
+    female = ['Viper','Astra','Killjoy','Sage','Deadlock','Vyse','Jett','Reyna','Raze','Neon','Skye','Fade']
+    unknown = ['Clove']
+
+    # Add players (max of 5)
 
     # Ask input for type of role
     try:
@@ -20,6 +26,8 @@ while True:
                 print("Please enter a valid role")
     except KeyboardInterrupt:
         break
+
+    # Exclude a role if choosing any
 
     # Player creates own list of agents
 
@@ -63,3 +71,7 @@ while True:
     # Print chosen agent
     chosenAgent = random.choice(agentRole)
     print(f'Your chosen agent is {chosenAgent}')
+
+    # Build a team feature (ask how many of each role and then make a team)
+
+    # Try again?
