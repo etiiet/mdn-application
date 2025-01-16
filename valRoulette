@@ -66,12 +66,6 @@ while True:
         else:
             print("Please enter a valid response (Y/N).")
 
-    # Agent addition feature
-
     # Print chosen agent
     chosenAgent = random.choice(agentRole)
     print(f'Your chosen agent is {chosenAgent}')
-
-    # Build a team feature (ask how many of each role and then make a team)
-
-    # Try again?
