@@ -42,7 +42,12 @@ while True:
                 removedAgent = input('Enter the agent you would like removed: ')
                 if removedAgent in agentRole:
                     agentRole.remove(removedAgent)
-                    print(agentRole)
+                    
+                    # If list comes empty
+                    if agentRole == []:
+                        agentRole.append(removedAgent)
+                        print("You cannot remove anymore agents.")
+
                     break
                 else:
                     print(f"Please enter a valid agent name from the following list: {agentRole}")
