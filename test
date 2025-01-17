@@ -1,0 +1,18 @@
+controller = ['Brimstone', 'Viper', 'Omen', 'Astra', 'Harbor', 'Clove']
+sentinel = ['Killjoy', 'Cypher', 'Sage', 'Chamber', 'Deadlock', 'Vyse']
+duelist = ['Phoenix', 'Jett', 'Reyna', 'Raze', 'Yoru', 'Neon', 'Iso']
+initiator = ['Sova', 'Breach', 'Skye', 'Kayo', 'Fade', 'Gekko', 'Tejo']
+allAgents = controller + sentinel + duelist + initiator
+
+customAgentPool = []
+
+while True:
+    try:
+        customAgentAddition = input('Please enter an agent to enter the agent pool (CTRL+C to finish): ')
+        if customAgentAddition not in allAgents:
+            print("Please enter a valid agent.")
+        else:
+            customAgentPool.append(customAgentAddition)
+            print(f"Current agent pool: {customAgentPool}")
+    except KeyboardInterrupt:
+        break
