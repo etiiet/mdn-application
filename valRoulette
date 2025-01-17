@@ -43,12 +43,6 @@ def custom_agent_pool():
             print(f"Current agent pool: {custom}")
     return custom
 
-
-def role_excluding():
-    '''
-    Allows the user to exclude a role if the allAgents role is chosen
-    '''
-
 def add_players():
     '''
     Allows for player names to be added and then assigned agents
@@ -92,8 +86,8 @@ def add_agents(agentPool):
             while True:
                 agentToAdd = input('Enter the agent you would like added: ')
                 if agentToAdd in allAgents:
+                    # Check for duplicates
                     if agentToAdd in agentPool:
-                        # Check for duplicates
                         duplicate = input(f"{agentToAdd} is already in the pool. Add it again? (Y/N): ")
                         if duplicate == 'Y':
                             agentPool.append(agentToAdd)
@@ -133,20 +127,79 @@ def generate_custom_team():
     '''
     Generate a custom team based on user input
     '''
+    customControllers = []
+    customSentinels = []
+    customDuelists = []
+    customInitiators = []
+
+    totalAgents = 5
+    remainingAgents = totalAgents
+
+    while remainingAgents > 0:
+        print(f"You have {remainingAgents} agents left to select.")
+
+        # Controllers
+        if remainingAgents > 0:
+            while True:
+                numberOfControllers = int(input("How many controllers would you like generated?: "))
+                if numberOfControllers > remainingAgents:
+                    print(f"You can only select up to {remainingAgents} agents. Try again.")
+                else:
+                    customControllers = random.sample(controller, numberOfControllers)
+                    remainingAgents -= numberOfControllers
+                    break
+
+        # Sentinels
+        if remainingAgents > 0:
+            while True:
+                print(f"You have {remainingAgents} agents left to select.")
+                numberOfSentinels = int(input("How many sentinels would you like generated?: "))
+                if numberOfSentinels > remainingAgents:
+                    print(f"You can only select up to {remainingAgents} agents. Try again.")
+                else:
+                    customSentinels = random.sample(sentinel, numberOfSentinels)
+                    remainingAgents -= numberOfSentinels
+                    break
+
+        # Duelists
+        if remainingAgents > 0:
+            while True:
+                print(f"You have {remainingAgents} agents left to select.")
+                numberOfDuelists = int(input("How many duelists would you like generated?: "))
+                if numberOfDuelists > remainingAgents:
+                    print(f"You can only select up to {remainingAgents} agents. Try again.")
+                else:
+                    customDuelists = random.sample(duelist, numberOfDuelists)
+                    remainingAgents -= numberOfDuelists
+                    break
+
+        # Initiators
+        if remainingAgents > 0:
+            while True:
+                print(f"You have {remainingAgents} agents left to select.")
+                numberOfInitiators = int(input("How many initiators would you like generated?: "))
+                if numberOfInitiators > remainingAgents:
+                    print(f"You can only select up to {remainingAgents} agents. Try again.")
+                else:
+                    customInitiators = random.sample(initiator, numberOfInitiators)
+                    remainingAgents -= numberOfInitiators
+                    break
+
+    randomTeam = customControllers + customSentinels + customDuelists + customInitiators
+    return randomTeam
 
 def main():
     while True:
-        menuChoice = input("Welcome! Would you like to continue with the roulette? (Y/N): ")
+        menuChoice = input("Welcome! CTRL+C to go back to the menu at any time. Would you like to continue with the roulette? (Y/N): ")
         if menuChoice == 'Y':
             try:
                 while True:
-                    teamOrIndividual = input("Generate a team (1) or an individual agent (2)? (CTRL+C to go back to menu): ")
+                    teamOrIndividual = input("Generate a team (1) or an individual agent (2)? : ")
                     if teamOrIndividual == '1':
-                        chooseOrRandom = input("Choose number of each role (1) or generate randomly (2)? (CTRL+C to go back to menu): ")
+                        chooseOrRandom = input("Choose number of each role (1) or generate randomly (2)?: ")
                         if chooseOrRandom == '1':
                             while True:
-                                '''
-                                team = 
+                                team = generate_custom_team()
                                 reroll = input(f"Your random team is: {team}. Would you like to reroll? (Y/N): ")
                                 if reroll == 'Y':
                                     continue
@@ -154,7 +207,6 @@ def main():
                                     break
                                 else:
                                     print("Please enter Y or N.")
-                                '''
                         elif chooseOrRandom == '2':
                             while True:
                                 team = generate_random_team()
@@ -178,10 +230,9 @@ def main():
                             'male': male,
                             'female': female,
                             'unknown': unknown,
-                            'custom': custom_agent_pool
                         }
                         if roleChoice == 'custom':
-                            agentPool = roleToAgentPool[roleChoice]()  # Call the function only if 'custom' is selected
+                            agentPool = custom_agent_pool()  # Call the function only if 'custom' is selected
                         else:
                             agentPool = roleToAgentPool[roleChoice]
                         agentPool = remove_agents(agentPool)
@@ -198,7 +249,7 @@ def main():
                     else:
                         print("Please enter 1 or 2.")
             except KeyboardInterrupt:
-                print("Returning to the main menu...")
+                print("\nReturning to the main menu...")
         elif menuChoice == 'N':
             print("Program shutting down...")
             break
