@@ -83,8 +83,38 @@ def remove_agents(agentPool):
 
 def add_agents(agentPool):
     '''
-    Allows the user to add agents from the current pool
+    Allows the user to add agents to the current pool
     '''
+    while True:
+        print(f'Current agent pool: {agentPool}')
+        add = input('Would you like to add any agents? (Y/N): ')
+        if add == 'Y':
+            while True:
+                agentToAdd = input('Enter the agent you would like added: ')
+                if agentToAdd in allAgents:
+                    if agentToAdd in agentPool:
+                        # Check for duplicates
+                        duplicate = input(f"{agentToAdd} is already in the pool. Add it again? (Y/N): ")
+                        if duplicate == 'Y':
+                            agentPool.append(agentToAdd)
+                            print(f"{agentToAdd} added again to the pool.")
+                            break
+                        elif duplicate == 'N':
+                            print(f"{agentToAdd} not added.")
+                            break
+                        else:
+                            print("Invalid input. Please enter Y or N.")
+                    else:
+                        agentPool.append(agentToAdd)
+                        print(f"{agentToAdd} added to the pool.")
+                        break
+                else:
+                    print(f"{agentToAdd} is not a valid agent. Please try again.")
+        elif add == 'N':
+            break
+        else:
+            print("Please enter Y or N.")
+    return agentPool
 
 def generate_random_team():
     '''
@@ -148,10 +178,14 @@ def main():
                             'male': male,
                             'female': female,
                             'unknown': unknown,
-                            'custom': custom_agent_pool()
+                            'custom': custom_agent_pool
                         }
-                        agentPool = roleToAgentPool[roleChoice]
+                        if roleChoice == 'custom':
+                            agentPool = roleToAgentPool[roleChoice]()  # Call the function only if 'custom' is selected
+                        else:
+                            agentPool = roleToAgentPool[roleChoice]
                         agentPool = remove_agents(agentPool)
+                        agentPool = add_agents(agentPool)
                         while True:
                             chosenAgent = random.choice(agentPool)
                             reroll = input(f"Your chosen agent is: {chosenAgent}. Would you like to reroll? (Y/N): ")
