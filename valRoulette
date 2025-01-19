@@ -1,40 +1,50 @@
 import random
 
 # Define groupings
-roles = ['controller', 'sentinel', 'duelist', 'initiator', 'allAgents','male','female','unknown','custom']
+roles = ["controller", "sentinel", "duelist", "initiator", "allAgents","male","female","unknown","custom"]
 
-controller = ['Brimstone', 'Viper', 'Omen', 'Astra', 'Harbor', 'Clove']
-sentinel = ['Killjoy', 'Cypher', 'Sage', 'Chamber', 'Deadlock', 'Vyse']
-duelist = ['Phoenix', 'Jett', 'Reyna', 'Raze', 'Yoru', 'Neon', 'Iso']
-initiator = ['Sova', 'Breach', 'Skye', 'Kayo', 'Fade', 'Gekko', 'Tejo']
+controller = ["Brimstone", "Viper", "Omen", "Astra", "Harbor", "Clove"]
+sentinel = ["Killjoy", "Cypher", "Sage", "Chamber", "Deadlock", "Vyse"]
+duelist = ["Phoenix", "Jett", "Reyna", "Raze", "Yoru", "Neon", "Iso"]
+initiator = ["Sova", "Breach", "Skye", "Kayo", "Fade", "Gekko", "Tejo"]
 allAgents = controller + sentinel + duelist + initiator
 
-male = ['Brimstone','Omen','Harbor','Cypher','Chamber','Phoenix','Yoru','Iso','Sova','Breach','Kayo','Gekko','Tejo']
-female = ['Viper','Astra','Killjoy','Sage','Deadlock','Vyse','Jett','Reyna','Raze','Neon','Skye','Fade']
-unknown = ['Clove']
+male = ["Brimstone","Omen","Harbor","Cypher","Chamber","Phoenix","Yoru","Iso","Sova","Breach","Kayo","Gekko","Tejo"]
+female = ["Viper","Astra","Killjoy","Sage","Deadlock","Vyse","Jett","Reyna","Raze","Neon","Skye","Fade"]
+unknown = ["Clove"]
 
 custom = []
 
 # Functions
 
 def get_role_choice():
-    '''
+    """
     Prompt the user to choose a role
-    '''
+
+    Parameters:
+        None
+    Returns:
+        str: The role chosen by the user.
+    """
     while True:
-        roleChoice = input('Enter the type of role you would like to play (controller, sentinel, duelist, initiator, allAgents, male, female, unknown, custom): ')
+        roleChoice = input("Enter the type of role you would like to play (controller, sentinel, duelist, initiator, allAgents, male, female, unknown, custom): ")
         if roleChoice in roles:
             return roleChoice
         else:
             print("Please enter a valid role")
 
 def custom_agent_pool():
-    '''
+    """
     Allows the user to create their own agent pool
-    '''
+
+    Parameters:
+        None
+    Returns:
+        list: A list of agents added to the custom pool.
+    """
     while True:
-        customAgentAddition = input('Please enter an agent to enter the agent pool (Type Done to finish): ')
-        if customAgentAddition == 'Done':
+        customAgentAddition = input("Please enter an agent to enter the agent pool (Type Done to finish): ")
+        if customAgentAddition == "Done":
             break
         if customAgentAddition not in allAgents:
             print("Please enter a valid agent.")
@@ -44,20 +54,30 @@ def custom_agent_pool():
     return custom
 
 def add_players():
-    '''
+    """
     Allows for player names to be added and then assigned agents
-    '''
+
+    Parameters:
+        x
+    Returns:
+        x
+    """
 
 def remove_agents(agentPool):
-    ''' 
+    """ 
     Allows the user to remove agents from the current pool
-    '''
+
+    Parameters:
+        agentPool (list): The current pool of agents.
+    Returns:
+        list: The updated pool of agents after removals.
+    """
     while True:
-        print(f'Current agent pool: {agentPool}')
-        remove = input('Would you like to remove any agents? (Y/N): ')
-        if remove == 'Y':
+        print(f"Current agent pool: {agentPool}")
+        remove = input("Would you like to remove any agents? (Y/N): ")
+        if remove == "Y":
             while True:
-                agentToRemove = input('Enter the agent you would like removed: ')
+                agentToRemove = input("Enter the agent you would like removed: ")
                 if agentToRemove in agentPool:
                     agentPool.remove(agentToRemove)
                     
@@ -69,31 +89,36 @@ def remove_agents(agentPool):
                     break
                 else:
                     print(f"Invalid agent name. Try again.")
-        elif remove == 'N':
+        elif remove == "N":
             break
         else:
             print("Please enter Y or N.")
     return agentPool
 
 def add_agents(agentPool):
-    '''
+    """
     Allows the user to add agents to the current pool
-    '''
+
+    Parameters:
+        agentPool (list): The current pool of agents.
+    Returns:
+        list: The updated pool of agents after additions.
+    """
     while True:
-        print(f'Current agent pool: {agentPool}')
-        add = input('Would you like to add any agents? (Y/N): ')
-        if add == 'Y':
+        print(f"Current agent pool: {agentPool}")
+        add = input("Would you like to add any agents? (Y/N): ")
+        if add == "Y":
             while True:
-                agentToAdd = input('Enter the agent you would like added: ')
+                agentToAdd = input("Enter the agent you would like added: ")
                 if agentToAdd in allAgents:
                     # Check for duplicates
                     if agentToAdd in agentPool:
                         duplicate = input(f"{agentToAdd} is already in the pool. Add it again? (Y/N): ")
-                        if duplicate == 'Y':
+                        if duplicate == "Y":
                             agentPool.append(agentToAdd)
                             print(f"{agentToAdd} added again to the pool.")
                             break
-                        elif duplicate == 'N':
+                        elif duplicate == "N":
                             print(f"{agentToAdd} not added.")
                             break
                         else:
@@ -104,16 +129,21 @@ def add_agents(agentPool):
                         break
                 else:
                     print(f"{agentToAdd} is not a valid agent. Please try again.")
-        elif add == 'N':
+        elif add == "N":
             break
         else:
             print("Please enter Y or N.")
     return agentPool
 
 def generate_random_team():
-    '''
+    """
     Generate a random team of a selected number of agents
-    '''
+
+    Parameters:
+        None
+    Returns:
+        list: A randomly generated team of agents.
+    """
     while True:
         numberInRandomTeam = int(input("How many agents would you like generated?: "))
         if numberInRandomTeam > 5:
@@ -124,9 +154,14 @@ def generate_random_team():
     return randomTeam
 
 def generate_custom_team():
-    '''
+    """
     Generate a custom team based on user input
-    '''
+
+    Parameters:
+        None
+    Returns:
+        list: A custom team of agents selected by the user.
+    """
     customControllers = []
     customSentinels = []
     customDuelists = []
@@ -189,50 +224,58 @@ def generate_custom_team():
     return randomTeam
 
 def main():
+    """
+    Main function to manage application of the roulette program, providing user options for generating teams or individual agents.
+
+    Parameters:
+        None
+    Returns:
+        None
+    """
     while True:
         menuChoice = input("Welcome! CTRL+C to go back to the menu at any time. Would you like to continue with the roulette? (Y/N): ")
-        if menuChoice == 'Y':
+        if menuChoice == "Y":
             try:
                 while True:
                     teamOrIndividual = input("Generate a team (1) or an individual agent (2)? : ")
-                    if teamOrIndividual == '1':
+                    if teamOrIndividual == "1":
                         chooseOrRandom = input("Choose number of each role (1) or generate randomly (2)?: ")
-                        if chooseOrRandom == '1':
+                        if chooseOrRandom == "1":
                             while True:
                                 team = generate_custom_team()
                                 reroll = input(f"Your random team is: {team}. Would you like to reroll? (Y/N): ")
-                                if reroll == 'Y':
+                                if reroll == "Y":
                                     continue
-                                elif reroll == 'N':
+                                elif reroll == "N":
                                     break
                                 else:
                                     print("Please enter Y or N.")
-                        elif chooseOrRandom == '2':
+                        elif chooseOrRandom == "2":
                             while True:
                                 team = generate_random_team()
                                 reroll = input(f"Your random team is: {team}. Would you like to reroll? (Y/N): ")
-                                if reroll == 'Y':
+                                if reroll == "Y":
                                     continue
-                                elif reroll == 'N':
+                                elif reroll == "N":
                                     break
                                 else:
                                     print("Please enter Y or N.")
                         else:
                             print("Please enter 1 or 2.")
-                    elif teamOrIndividual == '2':
+                    elif teamOrIndividual == "2":
                         roleChoice = get_role_choice()
                         roleToAgentPool = {
-                            'controller': controller,
-                            'sentinel': sentinel,
-                            'duelist': duelist,
-                            'initiator': initiator,
-                            'allAgents': allAgents,
-                            'male': male,
-                            'female': female,
-                            'unknown': unknown,
+                            "controller": controller,
+                            "sentinel": sentinel,
+                            "duelist": duelist,
+                            "initiator": initiator,
+                            "allAgents": allAgents,
+                            "male": male,
+                            "female": female,
+                            "unknown": unknown,
                         }
-                        if roleChoice == 'custom':
-                            agentPool = custom_agent_pool()  # Call the function only if 'custom' is selected
+                        if roleChoice == "custom":
+                            agentPool = custom_agent_pool()  # Call the function only if "custom" is selected
                         else:
                             agentPool = roleToAgentPool[roleChoice]
                         agentPool = remove_agents(agentPool)
@@ -240,9 +283,9 @@ def main():
                         while True:
                             chosenAgent = random.choice(agentPool)
                             reroll = input(f"Your chosen agent is: {chosenAgent}. Would you like to reroll? (Y/N): ")
-                            if reroll == 'Y':
+                            if reroll == "Y":
                                 continue
-                            elif reroll == 'N':
+                            elif reroll == "N":
                                 break
                             else:
                                 print("Please enter Y or N.")
@@ -250,7 +293,7 @@ def main():
                         print("Please enter 1 or 2.")
             except KeyboardInterrupt:
                 print("\nReturning to the main menu...")
-        elif menuChoice == 'N':
+        elif menuChoice == "N":
             print("Program shutting down...")
             break
         else:
