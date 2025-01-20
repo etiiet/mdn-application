@@ -1,17 +1,17 @@
 import random
 
 # Define groupings
-roles = ["controller", "sentinel", "duelist", "initiator", "allAgents","male","female","unknown","custom"]
+roles = ["controller", "sentinel", "duelist", "initiator", "allAgents", "male", "female", "unknown", "custom"]
 
-controller = ["Brimstone", "Viper", "Omen", "Astra", "Harbor", "Clove"]
-sentinel = ["Killjoy", "Cypher", "Sage", "Chamber", "Deadlock", "Vyse"]
-duelist = ["Phoenix", "Jett", "Reyna", "Raze", "Yoru", "Neon", "Iso"]
-initiator = ["Sova", "Breach", "Skye", "Kayo", "Fade", "Gekko", "Tejo"]
+controller = ["brimstone", "viper", "omen", "astra", "harbor", "clove"]
+sentinel = ["killjoy", "cypher", "sage", "chamber", "deadlock", "vyse"]
+duelist = ["phoenix", "jett", "reyna", "raze", "yoru", "neon", "iso"]
+initiator = ["sova", "breach", "skye", "kayo", "fade", "gekko", "tejo"]
 allAgents = controller + sentinel + duelist + initiator
 
-male = ["Brimstone","Omen","Harbor","Cypher","Chamber","Phoenix","Yoru","Iso","Sova","Breach","Kayo","Gekko","Tejo"]
-female = ["Viper","Astra","Killjoy","Sage","Deadlock","Vyse","Jett","Reyna","Raze","Neon","Skye","Fade"]
-unknown = ["Clove"]
+male = ["brimstone", "omen", "harbor", "cypher", "chamber", "phoenix", "yoru", "iso", "sova", "breach", "kayo", "gekko", "tejo"]
+female = ["viper", "astra", "killjoy", "sage", "deadlock", "vyse", "jett", "reyna", "raze", "neon", "skye", "fade"]
+unknown = ["clove"]
 
 custom = []
 
@@ -27,7 +27,7 @@ def get_role_choice():
         str: The role chosen by the user.
     """
     while True:
-        roleChoice = input("Enter the type of role you would like to play (controller, sentinel, duelist, initiator, allAgents, male, female, unknown, custom): ")
+        roleChoice = input("Enter the type of role you would like to play (controller, sentinel, duelist, initiator, allAgents, male, female, unknown, custom): ").lower()
         if roleChoice in roles:
             return roleChoice
         else:
@@ -43,7 +43,7 @@ def custom_agent_pool():
         list: A list of agents added to the custom pool.
     """
     while True:
-        customAgentAddition = input("Please enter an agent to enter the agent pool (Type Done to finish): ")
+        customAgentAddition = input("Please enter an agent to enter the agent pool (Type Done to finish): ").lower()
         if customAgentAddition == "Done":
             break
         if customAgentAddition not in allAgents:
@@ -67,7 +67,7 @@ def remove_agents(agentPool):
         remove = input("Would you like to remove any agents? (Y/N): ").upper()
         if remove == "Y":
             while True:
-                agentToRemove = input("Enter the agent you would like removed: ")
+                agentToRemove = input("Enter the agent you would like removed: ").lower()
                 if agentToRemove in agentPool:
                     agentPool.remove(agentToRemove)
                     
@@ -99,7 +99,7 @@ def add_agents(agentPool):
         add = input("Would you like to add any agents? (Y/N): ").upper()
         if add == "Y":
             while True:
-                agentToAdd = input("Enter the agent you would like added: ")
+                agentToAdd = input("Enter the agent you would like added: ").lower()
                 if agentToAdd in allAgents:
                     # Check for duplicates
                     if agentToAdd in agentPool:
@@ -228,7 +228,7 @@ def main():
         None
     """
     while True:
-        menuChoice = input("Welcome! CTRL+C to go back to the menu at any time. Would you like to continue with the roulette? (Y/N): ").upper()
+        menuChoice = input("Welcome! CTRL+C to go back to the menu at any time. Would you like to continue with the Valorant roulette? (Y/N): ").upper()
         if menuChoice == "Y":
             try:
                 while True:
