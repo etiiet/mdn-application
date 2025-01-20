@@ -135,13 +135,18 @@ def generate_random_team():
         list: A randomly generated team of agents.
     """
     while True:
-        numberInRandomTeam = int(input("How many agents would you like generated?: "))
-        if numberInRandomTeam > 5: # Limits team size to a maximum of 5 agents
-            print("Maximum number of agents allowed is 5. Try again.")
-        else:
-            break
-    randomTeam = random.sample(allAgents, numberInRandomTeam) # Randomly samples agents without replacement
-    return randomTeam
+        try:
+            numberInRandomTeam = int(input("How many agents would you like generated?: "))
+            if numberInRandomTeam > 5:  # Limits team size to a maximum of 5 agents
+                print("Maximum number of agents allowed is 5. Try again.")
+            elif numberInRandomTeam <= 0:  # Handle case where the number is zero or negative
+                print("Please enter a number greater than 0.")
+            else:
+                randomTeam = random.sample(allAgents, numberInRandomTeam)  # Randomly samples agents without replacement
+                return randomTeam
+        except ValueError:
+            print("Invalid input. Please enter a valid number.")
+
 
 def generate_custom_team():
     """
