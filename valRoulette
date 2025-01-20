@@ -53,16 +53,6 @@ def custom_agent_pool():
             print(f"Current agent pool: {custom}")
     return custom
 
-def add_players():
-    """
-    Allows for player names to be added and then assigned agents
-
-    Parameters:
-        x
-    Returns:
-        x
-    """
-
 def remove_agents(agentPool):
     """ 
     Allows the user to remove agents from the current pool
@@ -74,16 +64,16 @@ def remove_agents(agentPool):
     """
     while True:
         print(f"Current agent pool: {agentPool}")
-        remove = input("Would you like to remove any agents? (Y/N): ")
+        remove = input("Would you like to remove any agents? (Y/N): ").upper()
         if remove == "Y":
             while True:
                 agentToRemove = input("Enter the agent you would like removed: ")
                 if agentToRemove in agentPool:
                     agentPool.remove(agentToRemove)
                     
-                    # If list comes empty
+                    # Ensure the pool is not completely emptied
                     if agentPool == []:
-                        agentPool.append(agentToRemove)
+                        agentPool.append(agentToRemove) # Re-add the last agent to prevent an empty agent pool
                         print("You cannot remove anymore agents.")
 
                     break
@@ -106,14 +96,14 @@ def add_agents(agentPool):
     """
     while True:
         print(f"Current agent pool: {agentPool}")
-        add = input("Would you like to add any agents? (Y/N): ")
+        add = input("Would you like to add any agents? (Y/N): ").upper()
         if add == "Y":
             while True:
                 agentToAdd = input("Enter the agent you would like added: ")
                 if agentToAdd in allAgents:
                     # Check for duplicates
                     if agentToAdd in agentPool:
-                        duplicate = input(f"{agentToAdd} is already in the pool. Add it again? (Y/N): ")
+                        duplicate = input(f"{agentToAdd} is already in the pool. Add it again? (Y/N): ").upper()
                         if duplicate == "Y":
                             agentPool.append(agentToAdd)
                             print(f"{agentToAdd} added again to the pool.")
@@ -146,11 +136,11 @@ def generate_random_team():
     """
     while True:
         numberInRandomTeam = int(input("How many agents would you like generated?: "))
-        if numberInRandomTeam > 5:
+        if numberInRandomTeam > 5: # Limits team size to a maximum of 5 agents
             print("Maximum number of agents allowed is 5. Try again.")
         else:
             break
-    randomTeam = random.sample(allAgents, numberInRandomTeam)
+    randomTeam = random.sample(allAgents, numberInRandomTeam) # Randomly samples agents without replacement
     return randomTeam
 
 def generate_custom_team():
@@ -167,60 +157,65 @@ def generate_custom_team():
     customDuelists = []
     customInitiators = []
 
-    totalAgents = 5
-    remainingAgents = totalAgents
+    remainingAgents = 5 # Limits the team size to 5 agents
 
+    # Controllers
     while remainingAgents > 0:
-        print(f"You have {remainingAgents} agents left to select.")
+        try:
+            print(f"You have {remainingAgents} agents left to select.")
+            numberOfControllers = int(input("How many controllers would you like generated?: "))
+            if numberOfControllers < 0 or numberOfControllers > remainingAgents:
+                print(f"Please enter a number between 0 and {remainingAgents}.")
+            else:
+                customControllers = random.sample(controller, numberOfControllers) # Randomly select controllers
+                remainingAgents -= numberOfControllers # Update remaining agents count
+                break
+        except ValueError:
+            print("Invalid input. Please enter a valid number.")
 
-        # Controllers
-        if remainingAgents > 0:
-            while True:
-                numberOfControllers = int(input("How many controllers would you like generated?: "))
-                if numberOfControllers > remainingAgents:
-                    print(f"You can only select up to {remainingAgents} agents. Try again.")
-                else:
-                    customControllers = random.sample(controller, numberOfControllers)
-                    remainingAgents -= numberOfControllers
-                    break
+    # Sentinels
+    while remainingAgents > 0:
+        try:
+            print(f"You have {remainingAgents} agents left to select.")
+            numberOfSentinels = int(input("How many sentinels would you like generated?: "))
+            if numberOfSentinels < 0 or numberOfSentinels > remainingAgents:
+                print(f"Please enter a number between 0 and {remainingAgents}.")
+            else:
+                customSentinels = random.sample(sentinel, numberOfSentinels) # Randomly select sentinels
+                remainingAgents -= numberOfSentinels
+                break
+        except ValueError:
+            print("Invalid input. Please enter a valid number.")
 
-        # Sentinels
-        if remainingAgents > 0:
-            while True:
-                print(f"You have {remainingAgents} agents left to select.")
-                numberOfSentinels = int(input("How many sentinels would you like generated?: "))
-                if numberOfSentinels > remainingAgents:
-                    print(f"You can only select up to {remainingAgents} agents. Try again.")
-                else:
-                    customSentinels = random.sample(sentinel, numberOfSentinels)
-                    remainingAgents -= numberOfSentinels
-                    break
+    # Duelists
+    while remainingAgents > 0:
+        try:
+            print(f"You have {remainingAgents} agents left to select.")
+            numberOfDuelists = int(input("How many duelists would you like generated?: "))
+            if numberOfDuelists < 0 or numberOfDuelists > remainingAgents:
+                print(f"Please enter a number between 0 and {remainingAgents}.")
+            else:
+                customDuelists = random.sample(duelist, numberOfDuelists) # Randomly select duelists
+                remainingAgents -= numberOfDuelists
+                break
+        except ValueError:
+            print("Invalid input. Please enter a valid number.")
 
-        # Duelists
-        if remainingAgents > 0:
-            while True:
-                print(f"You have {remainingAgents} agents left to select.")
-                numberOfDuelists = int(input("How many duelists would you like generated?: "))
-                if numberOfDuelists > remainingAgents:
-                    print(f"You can only select up to {remainingAgents} agents. Try again.")
-                else:
-                    customDuelists = random.sample(duelist, numberOfDuelists)
-                    remainingAgents -= numberOfDuelists
-                    break
+    # Initiators
+    while remainingAgents > 0:
+        try:
+            print(f"You have {remainingAgents} agents left to select.")
+            numberOfInitiators = int(input("How many initiators would you like generated?: "))
+            if numberOfInitiators < 0 or numberOfInitiators > remainingAgents:
+                print(f"Please enter a number between 0 and {remainingAgents}.")
+            else:
+                customInitiators = random.sample(initiator, numberOfInitiators) # Randomly select initiators
+                remainingAgents -= numberOfInitiators
+                break
+        except ValueError:
+            print("Invalid input. Please enter a valid number.")
 
-        # Initiators
-        if remainingAgents > 0:
-            while True:
-                print(f"You have {remainingAgents} agents left to select.")
-                numberOfInitiators = int(input("How many initiators would you like generated?: "))
-                if numberOfInitiators > remainingAgents:
-                    print(f"You can only select up to {remainingAgents} agents. Try again.")
-                else:
-                    customInitiators = random.sample(initiator, numberOfInitiators)
-                    remainingAgents -= numberOfInitiators
-                    break
-
-    randomTeam = customControllers + customSentinels + customDuelists + customInitiators
+    randomTeam = customControllers + customSentinels + customDuelists + customInitiators # Combine selected agents
     return randomTeam
 
 def main():
@@ -233,19 +228,19 @@ def main():
         None
     """
     while True:
-        menuChoice = input("Welcome! CTRL+C to go back to the menu at any time. Would you like to continue with the roulette? (Y/N): ")
+        menuChoice = input("Welcome! CTRL+C to go back to the menu at any time. Would you like to continue with the roulette? (Y/N): ").upper()
         if menuChoice == "Y":
             try:
                 while True:
                     teamOrIndividual = input("Generate a team (1) or an individual agent (2)? : ")
                     if teamOrIndividual == "1":
-                        chooseOrRandom = input("Choose number of each role (1) or generate randomly (2)?: ")
+                        chooseOrRandom = input("Choose number of agents for each role (1) or generate randomly (2)?: ")
                         if chooseOrRandom == "1":
                             while True:
                                 team = generate_custom_team()
-                                reroll = input(f"Your random team is: {team}. Would you like to reroll? (Y/N): ")
+                                reroll = input(f"Your random team is: {team}. Would you like to reroll? (Y/N): ").upper()
                                 if reroll == "Y":
-                                    continue
+                                    continue # Allow for rerolling
                                 elif reroll == "N":
                                     break
                                 else:
@@ -253,9 +248,9 @@ def main():
                         elif chooseOrRandom == "2":
                             while True:
                                 team = generate_random_team()
-                                reroll = input(f"Your random team is: {team}. Would you like to reroll? (Y/N): ")
+                                reroll = input(f"Your random team is: {team}. Would you like to reroll? (Y/N): ").upper()
                                 if reroll == "Y":
-                                    continue
+                                    continue # Allow for rerolling
                                 elif reroll == "N":
                                     break
                                 else:
@@ -278,13 +273,13 @@ def main():
                             agentPool = custom_agent_pool()  # Call the function only if "custom" is selected
                         else:
                             agentPool = roleToAgentPool[roleChoice]
-                        agentPool = remove_agents(agentPool)
-                        agentPool = add_agents(agentPool)
+                        agentPool = remove_agents(agentPool) # Allow user to remove agents from the pool
+                        agentPool = add_agents(agentPool) # Allow user to add agents from the pool
                         while True:
-                            chosenAgent = random.choice(agentPool)
-                            reroll = input(f"Your chosen agent is: {chosenAgent}. Would you like to reroll? (Y/N): ")
+                            chosenAgent = random.choice(agentPool) # Randomly select an agent from the pool
+                            reroll = input(f"Your chosen agent is: {chosenAgent}. Would you like to reroll? (Y/N): ").upper()
                             if reroll == "Y":
-                                continue
+                                continue # Allow for rerolling
                             elif reroll == "N":
                                 break
                             else:
